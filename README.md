@@ -63,4 +63,4 @@ The display currently shows the temperature/weather of the current and next day.
 * 10x M3x50mm screws and nuts – 2 EUR
 * 1x Box – Free
 
-![PixelTime](/images/PixelTime_animated.GIF)
+<div style="text-align:center"><img src ="/images/PixelTime_animated.GIF" />PixelTime</div>
