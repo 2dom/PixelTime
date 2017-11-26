@@ -54,13 +54,13 @@ The display currently shows the temperature/weather of the current and next day.
 
 ## Bill of materials
 
-*1x P10 LED Matrix (Aliexpress) – 17 EUR
-*20x Dupond jumper cables (Aliexpress) – 0.5 EUR
-*1x NodeMCU ESP8266 – 3 EUR
-*2x Acrylics – 10 EUR
-*1x 3D prints – 3 EUR (plastics)
-*1x 2A USB charger & 2m cable (ebay) – 8 EUR
-*10x M3x50mm screws and nuts – 2 EUR
-*1x Box – Free
+* 1x P10 LED Matrix (Aliexpress) – 17 EUR
+* 20x Dupond jumper cables (Aliexpress) – 0.5 EUR
+* 1x NodeMCU ESP8266 – 3 EUR
+* 2x Acrylics – 10 EUR
+* 1x 3D prints – 3 EUR (plastics)
+* 1x 2A USB charger & 2m cable (ebay) – 8 EUR
+* 10x M3x50mm screws and nuts – 2 EUR
+* 1x Box – Free
 
 ![PixelTime](/images/PixelTime_animated.GIF)
