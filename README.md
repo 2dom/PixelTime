@@ -33,6 +33,8 @@ If we put all these things together we end up with something rather elegant: all
 
 ![PixelTime](/images/IMG_0827.jpg)
 
+![PixelTime](/images/IMG_0829.jpg)
+
 If you have access to a laser cutter for the acrylic, you might get away without any box whatsoever. In my case, I had an old slatted bed-frame lying around that wanted to be used. So after some sawing, gluing and a few layers of Mahogany oil I had a nice box that fits our furniture in style.
 
 ![PixelTime](/images/IMG_0818.jpg)
@@ -40,7 +42,7 @@ If you have access to a laser cutter for the acrylic, you might get away without
 In order to supply and program PixelTIme, I created another 3D model that allows panel-mounting of the ESP8266. Add a 2A phone charger and a nice 2m USB cable from ebay and voila – PixelTime it is.
 
 
-![PixelTime](/images/IMG_0829.jpg)
+
 
 ## Software
 
