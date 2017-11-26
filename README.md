@@ -1,3 +1,3 @@
 # PixelTime
 
-![PixelTime](https://2dom.github.io/PixelTime/)
+[PixelTime](https://2dom.github.io/PixelTime/)
