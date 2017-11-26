@@ -43,40 +43,44 @@ By this definition, I believe that PixelTime is my first project that comes anyw
 
 <h2>Display</h2>
 
-When I started looking into making a weather clock for my family I naturally started with the central element - the display. Choosing the right display for a project is increasingly difficult since there are so many options! E-Paper, COG LCD, TFT, scanning laser, POV, glow-in-the-dark paper, WS2812B matrix, ferrofluid – you name it. Also, the choice of display defines to some extend the system that drives it. High resolution color varieties require high bus speeds, more memory and processing power. This is less of a problem cost-wise since the availability of the Raspberry Pis Zero, however, then we add the extra complexity of a full blown Linux system. This will reduce simplicity and repeatability significantly whilst increasing the involved time effort.
+Choosing the right display for a project is increasingly difficult these days - there are just so many options! E-Paper, COG LCD, TFT, scanning laser, POV, glow-in-the-dark paper, WS2812B matrix, ferrofluid – you name it. Also, the choice of display defines to some extend the system that drives it. High resolution color varieties require high bus speeds, more memory and processing power. This is less of a problem cost-wise (5 EUR Raspberry PI Zero - check), however, then we usually add the extra complexity of a full blown Linux distribution. This will reduce simplicity and repeatability significantly whilst increasing the involved (set-up) time effort.
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/P10_matrix.jpg" alt="">
 
-In order to keep the complexity on the controller part to a minimum I settled on a ESP8266 based NodeMCU that comes with pre-soldered pin headers. On the display side of things, I chose a Chinese P10 RGB led matrix module that integrates all the necessary driver electronics into a single piece of kit. It offers 32x16=512 RGB pixels with a 1cm spacing for as little as 17 EUR.  The equivalent with WS2812B leds would cost at least twice as much. Furthermore, the P10 module comes fully assembled in a sturdy plastic module frame with defined screw mounts and offers connectivity via two standard pin-headers. Unfortunately, no driver for the ESP8266 existed so I had to write one. The <a href="https://github.com/2dom/P10_matrix">P10_matrix library</a> driver is Arduino GFX compatible so you can use all the standard graphics primitives and fonts. This picture shows the library in the early stages.
+In the interest of  simplicity I settled on a ESP8266 based NodeMCU microcontroller that comes with pre-soldered pin headers. On the display side of things, I chose a Chinese P10 RGB led matrix module that integrates all the necessary driver electronics into a single piece of kit. It offers 32x16=512 RGB pixels with a 1cm spacing for as little as 17 EUR.  The equivalent with WS2812B leds would cost at least twice as much. Furthermore, the P10 module comes fully assembled in a sturdy plastic module frame with defined screw mounts and offers connectivity via two standard pin-headers. Unfortunately, no driver for the ESP8266 existed so I had to write one. The <a href="https://github.com/2dom/P10_matrix">P10_matrix library</a> driver is Arduino GFX compatible so you can use all the standard graphics primitives and fonts. The link also includes the information on how to connect the NodeMCU to the LED matrix. This picture below depicts the library in the early stages of development.
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0617.jpg" alt="">
 
 <h2>Diffuser and assembly</h2>
 
-In order do obtain that vintage computer pixel look, I created a <a href="https://www.thingiverse.com/thing:2668845">16x16 separator grid</a>, printed two on my 3d printer and glued them together to form one big 32x16 mesh.
-To obtain evenly lit pixels I used a sheet of A3 copy paper as a diffuser screen. As the front “glass” I got a piece of 3mm black/transparent acrylic for 10 EUR. For the back, I screwed a another piece of acrylic to the back of the matrix module using the standard screw mounts.
+In order do obtain that vintage computer pixel look, I created a <a href="https://www.thingiverse.com/thing:2668845">16x16 separator grid</a>, then printed it on my 3d printer twice and glued the pieces together to form one big 32x16 grid.
+To obtain evenly lit pixels, I used a sheet of A3 copy paper as a diffuser screen. As the front “glass” I got a piece of 3mm black/transparent acrylic for 10 EUR. For the back-plate, I screwed another piece of acrylic to the back of the matrix module using the standard screw mounts.
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0621.jpg" alt="">
 
-If we put all these parts together we end up with something rather nice: all electrical connections are made using standard Dupont style jumper cables, the module frame, the separator grid and the paper are simply sandwiched between the two pieces of acrylic being screwed together using a few longish M3 screws.
+The combination of all these parts now leads to something rather neat: all electrical connections are made using standard Dupont style jumper cables. The module frame, the separator grid and the paper are simply sandwiched between the two pieces of acrylic using a few longish M3 screws.
 
-<p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0827.jpg" alt="">
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0829.jpg" alt="">
 
-  If you have access to a laser cutter for the acrylic, you might get away without any box whatsoever. In my case, I had an old slatted bed-frame lying around that wanted to be used. So after some sawing, gluing and a few layers of Mahogany oil I had a nice box that fits our furniture in style.
+  If you have access to a laser cutter for the acrylics and prefer a clean techie look, you might just stop here. I had an old slatted bed-frame lying around that wanted to be used. So after some sawing, gluing and a few layers of Mahogany oil I had a nice box that neatly fits next to my <a href="http://2dom.github.io/the-radio/">radio</a>.
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0818.jpg" alt="">
 
-  In order to supply and program PixelTime, I created a <a href="https://www.thingiverse.com/thing:2665294">NodeMCU panel mount</a>. Add a 2A phone charger and a nice 2m USB cable from ebay and voila – PixelTime it is.
+  To supply and program PixelTime, I created a simple <a href="https://www.thingiverse.com/thing:2665294">NodeMCU panel mount</a>. This mount exposes the micro USB connector as well as both click buttons to the outside of the box. A 2A phone charger and a nice 2m USB cable from ebay completes the assembly.
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0821.jpg" alt="">
 
 <h2>Software</h2>
 
-In order for the software to run you will need to open an account with <a href="https://openweathermap.org/">openweathermap</a> (is free), edit the Wifi network credentials and update the REST request strings with your openweathermap API key and location. Apart from that, you should just be able to flash NodeMCU with the code as is. Flashing the NodeMCU requires  <a href="https://www.arduino.cc/en/Main/Software">Arduino</a> and the <a href="https://github.com/esp8266/Arduino">ESP8266 Arduino core</a>.
+For the software to run you will need to open an account with <a href="https://openweathermap.org/">openweathermap</a> (it's free), edit the Wifi network credentials and update the REST request strings with your openweathermap API key and location. Apart from that, you should just be able to flash the NodeMCU with the code as is. Flashing the NodeMCU requires  <a href="https://www.arduino.cc/en/Main/Software">Arduino</a> and the <a href="https://github.com/esp8266/Arduino">ESP8266 Arduino core</a>.
 <br><br>
-The display currently shows the temperature/weather of the current and next day. It jumps between minimum temperatures/worst weather and maximum temperatures/best weather in a 5 second interval.  I created some low resolution animated weather icons that are more or less compatible with the openweathermap rest responses. I just didn't bother  drawing all the night icons (who cares - it's dark).
+The display currently shows the temperature/weather of the current and next day. It jumps between minimum temperatures/worst weather and maximum temperatures/best weather in a 5 second interval. The dot on the bottom left indicates what the display is currently showing.  I created some low resolution animated weather icons that are more or less compatible with the <a href="https://openweathermap.org/weather-conditions">openweathermap rest API</a> response. I didn't bother drawing all the night icons (who cares - it's dark).
+<br><br>
+
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/pixel_weather.gif" alt="">
+  Congratulations ... you made it all the way through. PixelTime it is!
+
+  <p><img src="https://raw.github.com/2dom/PixelTime/master/images/PixelTime_animated.GIF" alt="">
 
 
 
@@ -98,7 +102,6 @@ The display currently shows the temperature/weather of the current and next day.
 </ul>
 
 
-<p><img src="https://raw.github.com/2dom/PixelTime/master/images/PixelTime_animated.GIF" alt="">
       </section>
     </div>
 
