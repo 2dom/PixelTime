@@ -41,7 +41,7 @@ If you have access to a laser cutter for the acrylic, you might get away without
 
 In order to supply and program PixelTIme, I created another 3D model that allows panel-mounting of the ESP8266. Add a 2A phone charger and a nice 2m USB cable from ebay and voila – PixelTime it is.
 
-
+![PixelTime](/images/IMG_0821.jpg)
 
 
 ## Software
@@ -65,4 +65,4 @@ The display currently shows the temperature/weather of the current and next day.
 10x M3x50mm screws and nuts – 2 EUR
 1x Box – Free
 
-![PixelTime](/images/PixelTime_animated.gif)
+![PixelTime](/images/PixelTime_animated.GIF)
