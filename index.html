@@ -47,13 +47,14 @@ Choosing the right display for a project is increasingly difficult these days - 
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/P10_matrix.jpg" alt="">
 
-In the interest of  simplicity I settled on a ESP8266 based NodeMCU micro controller that comes with pre-soldered pin headers. On the display side of things, I chose a Chinese P10 RGB led matrix module that integrates all the necessary driver electronics into a single piece of kit. It offers 32x16=512 RGB pixels with a 1cm spacing for as little as 17 EUR.  The equivalent with WS2812B leds would cost at least twice as much. Furthermore, the P10 module comes fully assembled in a sturdy plastic module frame with defined screw mounts and offers connectivity via two standard pin-headers. Unfortunately, no reasonable Arduino driver for the ESP8266 existed so far hence I had to write one. The <a href="https://github.com/2dom/P10_matrix">P10_matrix</a> driver is based on a neat little hack that reduces the number of required GPIOs far enough so it can be driven by the ESP8266. Since it is also Arduino GFX compatible, you can use all the standard graphics primitives and fonts. The link also includes the information on how to connect the NodeMCU to the LED matrix. This picture below depicts the library in the early stages of development.
+In the interest of  simplicity I settled on a ESP8266 based NodeMCU micro controller that comes with pre-soldered pin headers. On the display side of things, I chose a Chinese P10 RGB led matrix module that integrates all the necessary driver electronics into a single piece of kit. It offers 32x16=512 RGB pixels with a 1cm spacing for as little as 17 EUR.  The equivalent with WS2812B leds would cost at least twice as much. Furthermore, the P10 module comes fully assembled in a sturdy plastic module frame with defined screw mounts and offers connectivity via two standard pin-headers. Unfortunately, since no reasonable Arduino driver for the ESP8266 existed, I had to write my own. The <a href="https://github.com/2dom/P10_matrix">P10_matrix</a> driver is based on a neat little hack that reduces the number of required GPIOs far enough, so it can be driven by the ESP8266. Since it is also Arduino GFX compatible, you can use all the standard graphics primitives and fonts.
+The link also includes the information on how to connect the NodeMCU to the LED matrix. The picture below depicts the library in the early stages of development.
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0617.jpg" alt="">
 
 <h2>Assembly</h2>
 
-Many LED matrix displays I have seen use hand-made cardboard or plywood separator grids. Fortunately, the display is small enough so the separator grid can be 3D printed. So I created a <a href="https://www.thingiverse.com/thing:2668845">16x16 separator grid</a> model, 3D printed it twice and glued the pieces together to form one big 32x16 grid.
+Many big-pixel LED matrix builds use hand-made cardboard or plywood separator grids. Fortunately, the P10 matrix is small enough that the separator grid can be 3D printed. So I created a <a href="https://www.thingiverse.com/thing:2668845">16x16 separator grid</a> model, 3D printed it twice and glued the pieces together to form one big 32x16 grid.
 To obtain evenly lit pixels, I used a sheet of A3 copy paper as a diffuser screen. As the front “glass” I got a piece of 3mm black/transparent acrylic. For the back-plate, I screwed another piece of acrylic to the back of the matrix module using the standard screw mounts.
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0621.jpg" alt="">
@@ -62,7 +63,7 @@ The combination of all these parts now leads to something rather neat: all elect
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0829.jpg" alt="">
 
-  If you have access to a laser cutter for the acrylics and prefer a clean techie look, you might just stop here. I had an old slatted bed-frame lying around that wanted to be used. So after some woodwork and a few layers of mahogany oil I had a nice box that neatly fits next to my <a href="http://2dom.github.io/the-radio/">radio</a>.
+  If you have access to a laser cutter for the acrylics and prefer a clean techie look, you might just stop here. In my case, the edges did not look 100% so I chose to make a wooden case for the clock. I had an old slatted bed-frame lying around that wanted to be used. So after some woodwork and a few layers of mahogany oil I had a nice box that neatly fits next to my <a href="http://2dom.github.io/the-radio/">radio</a>.
 
 <p><img src="https://raw.github.com/2dom/PixelTime/master/images/IMG_0818.jpg" alt="">
 
