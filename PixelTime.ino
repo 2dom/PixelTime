@@ -21,6 +21,9 @@ MDNSResponder mdns;
 ESP8266WebServer server(80);
 Ticker display_ticker;
 
+int brightness=0;
+int dimm=0;
+
 
 // Pins for LED MATRIX
 #define P_LAT 16
@@ -109,13 +112,20 @@ const char INDEX_HTML[] =
 // This gets all the weather data from openweathermap
 bool update_weather()
 {
-  display.clearDisplay();
+  dimm=-1;
+
+  while (brightness>0)
+    yield();
+
+  display_ticker.detach();
+
+
 
   String response;
 
   // Fetch current day - only sunset time information used for now
   HTTPClient http;
-  http.begin("http://api.openweathermap.org/data/2.5/weather?q=Berlin,DE&APPID=dasdasd24fe7a9b4e64fbbb4ea"); //HTTP
+  http.begin("http://api.openweathermap.org/data/2.5/weather?q=Berlin,DE&APPID=dgsdfsfsdfsdfsfd"); //HTTP
   int httpCode = http.GET();
   if(httpCode > 0) {
     // HTTP header has been send and Server response header has been handled
@@ -144,7 +154,7 @@ bool update_weather()
   // Fetch forecast
   HTTPClient http2;
 
-  http2.begin("http://api.openweathermap.org/data/2.5/forecast?q=Berlin,DE&APPID=dasdasd24fe7a9b4e64fbbb4ea"); //HTTP
+  http2.begin("http://api.openweathermap.org/data/2.5/forecast?q=Berlin,DE&APPID=sfsdfsfsdffsdfsfsdffdsdf"); //HTTP
   int httpCode2 = http2.GET();
 
   // httpCode will be negative on error
@@ -161,7 +171,9 @@ bool update_weather()
       Serial.println("Weather data received");
       #endif
       http2.end();
+
     }
+
   } else {
     weather_get_error=true;
     Serial.printf("[HTTP] GET... failed, error: %s\n", http2.errorToString(httpCode2).c_str());
@@ -183,6 +195,9 @@ bool update_weather()
 
     }
     http2.end();
+    display_ticker.attach(0.001, display_updater);
+
+    dimm=1;
     return false;
   }
 
@@ -329,7 +344,9 @@ bool update_weather()
   Serial.println("I-Low 0:" + String(icon_show_low[0])+ ", I-High:" + String(icon_show_high[0]));
   Serial.println("I-Low 1:" + String(icon_show_low[1])+ ", I-High:" + String(icon_show_high[1]));
   #endif
+  display_ticker.attach(0.001, display_updater);
 
+   dimm=1;
   return true;
 }
 
@@ -406,10 +423,25 @@ void handleNotFound()
   server.send(404, "text/plain", message);
 }
 
+
+
 // ISR for display refresh
 void display_updater()
 {
-  display.display(70);
+
+  brightness=brightness+dimm;
+  if (brightness<0)
+  {
+    brightness=0;
+    dimm=0;
+  }
+
+  if (brightness>2100)
+  {
+    brightness=2100;
+    dimm=0;
+  }
+  display.display(brightness/30);
 }
 
 // Start Accespoint for entering WIFI info
@@ -488,7 +520,7 @@ void start_wifi()
   }
 
   esid="youressid";
-  pass="yourkey";
+  pass="yourwifikey";
   ntp="0.de.pool.ntp.org";
   Serial.println("essid: " + esid);
   Serial.println("pass: " + pass);
@@ -529,16 +561,17 @@ void setup() {
   display.setTextColor(myMAGENTA);
   display.setCursor(2,8);
   display.print("Time");
+
   EEPROM.begin(512);
   Serial.begin(9600);
-  display_ticker.attach(0.001, display_updater);
 
-  start_wifi();
+    start_wifi();
   start_ota();
-
+  display_ticker.attach(0.001, display_updater);
+  dimm=1;
   yield();
   delay(3000);
-  display.clearDisplay();
+
 }
 
 union single_double{
